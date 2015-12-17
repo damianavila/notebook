@@ -187,6 +187,7 @@ class NotebookWebApplication(web.Application):
             },
             version_hash=version_hash,
             ignore_minified_js=ipython_app.ignore_minified_js,
+            nbextensions=ipython_app.nbextensions,
             
             # authentication
             cookie_secret=ipython_app.cookie_secret,
@@ -644,6 +645,9 @@ class NotebookApp(JupyterApp):
         else:
             path.append(os.path.join(get_ipython_dir(), 'nbextensions'))
         return path
+
+    nbextensions = List(Unicode(), config=True,
+        help="A list of nbextensions to enable.")
 
     websocket_url = Unicode("", config=True,
         help="""The base URL for websockets,
